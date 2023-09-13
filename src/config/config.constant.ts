@@ -1,0 +1,3 @@
+export const CONFIG_DATABASE = 'CONFIG_DATABASE';
+export const CONFIG_OAUTH = 'CONFIG_OAUTH';
+export const CONFIG_JWT = 'CONFIG_JWT';
