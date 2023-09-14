@@ -1,0 +1,15 @@
+- transfer to prisma
+- add migration
+- add refresh token
++ connect to github
++ check data from google
+- endpoint for change username
+- module for statistic
+- module for notes
+- change language, animation Pes Patron piss
+
+actions:
+- show note picture, need to enter note name and/or enter piano button
+- show note name, need to enter notes string/enter piano button
+- show piano button, need to enter note name/enter notes string
+
