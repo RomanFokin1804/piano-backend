@@ -3,19 +3,19 @@ import { PassportModule } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { GoogleStrategy } from './strategies/google.strategy';
 import { JwtModule } from '@nestjs/jwt';
-import { UserEntity } from '../users/entities/user.entity';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthController } from './auth.controller';
 import { ConfigService } from '@nestjs/config';
 import { IJWTConfig } from '../config/config.jwt';
 import { CONFIG_JWT } from '../config/config.constant';
+import { JwtStrategy } from './strategies/jwt.strategy';
+import { UserService } from '../users/user.service';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Module({
   imports: [
     JwtModule.registerAsync({
       imports: undefined,
       useFactory: (configService: ConfigService) => {
-        console.log(configService.get<IJWTConfig>(CONFIG_JWT));
         const { secret, signOptions } =
           configService.get<IJWTConfig>(CONFIG_JWT);
         return {
@@ -27,10 +27,15 @@ import { CONFIG_JWT } from '../config/config.constant';
       inject: [ConfigService],
     }),
     PassportModule,
-    TypeOrmModule.forFeature([UserEntity]),
   ],
   controllers: [AuthController],
-  providers: [AuthService, GoogleStrategy /*, JwtStrategy, JwtService*/],
+  providers: [
+    AuthService,
+    GoogleStrategy,
+    JwtStrategy,
+    UserService,
+    PrismaService,
+  ],
   exports: [AuthService],
 })
 export class AuthModule {}
