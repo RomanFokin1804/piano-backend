@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as process from 'process';
+import { AllExceptionsFilter } from './middleware/exception.interceptor';
 
 async function bootstrap() {
   BigInt.prototype['toJSON'] = function () {
@@ -9,6 +10,8 @@ async function bootstrap() {
   };
 
   const app = await NestFactory.create(AppModule);
+
+  app.useGlobalFilters(new AllExceptionsFilter());
 
   const PORT = +process.env.PORT || 3000;
 

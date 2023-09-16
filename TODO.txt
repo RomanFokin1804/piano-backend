@@ -1,5 +1,5 @@
-- transfer to prisma
-- add migration
++ transfer to prisma
++ add migration
 - add refresh token
 + connect to github
 + check data from google
@@ -7,6 +7,7 @@
 - module for statistic
 - module for notes
 - change language, animation Pes Patron piss
++ user module
 
 actions:
 - show note picture, need to enter note name and/or enter piano button

@@ -5,11 +5,11 @@ import {
   Get,
   Param,
   Patch,
-  Post,
   UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('user')
 export class UserController {
@@ -21,27 +21,21 @@ export class UserController {
     return await this.userService.getById({ id: Number(id) });
   }
 
-  @Get('all')
+  @Get()
   @UseGuards(JwtAuthGuard)
   async getAll() {
-    return true;
+    return await this.userService.getAll({});
   }
 
-  @Post()
+  @Patch('/:id')
   @UseGuards(JwtAuthGuard)
-  async create(@Body() id: string) {
-    return true;
+  async update(@Param('id') id: string, @Body() body: UpdateUserDto) {
+    return await this.userService.update({ where: { id: +id }, data: body });
   }
 
-  @Patch()
+  @Delete('/:id')
   @UseGuards(JwtAuthGuard)
-  async update() {
-    return true;
-  }
-
-  @Delete()
-  @UseGuards(JwtAuthGuard)
-  async delete() {
-    return true;
+  async delete(@Param('id') id: string) {
+    return await this.userService.delete({ id: +id });
   }
 }
