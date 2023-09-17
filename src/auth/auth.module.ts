@@ -8,8 +8,7 @@ import { ConfigService } from '@nestjs/config';
 import { IJWTConfig } from '../config/config.jwt';
 import { CONFIG_JWT } from '../config/config.constant';
 import { JwtStrategy } from './strategies/jwt.strategy';
-import { UserService } from '../users/user.service';
-import { PrismaService } from '../prisma/prisma.service';
+import { UserModule } from '../users/user.module';
 
 @Module({
   imports: [
@@ -27,15 +26,10 @@ import { PrismaService } from '../prisma/prisma.service';
       inject: [ConfigService],
     }),
     PassportModule,
+    UserModule,
   ],
   controllers: [AuthController],
-  providers: [
-    AuthService,
-    GoogleStrategy,
-    JwtStrategy,
-    UserService,
-    PrismaService,
-  ],
+  providers: [AuthService, GoogleStrategy, JwtStrategy],
   exports: [AuthService],
 })
 export class AuthModule {}

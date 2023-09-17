@@ -10,6 +10,7 @@ import {
 import { UserService } from './user.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { generateFromEmail } from 'unique-username-generator';
 
 @Controller('user')
 export class UserController {
@@ -18,24 +19,24 @@ export class UserController {
   @Get('/:id')
   @UseGuards(JwtAuthGuard)
   async getById(@Param('id') id: string) {
-    return await this.userService.getById({ id: Number(id) });
+    return await this.userService.getById(id);
   }
 
   @Get()
-  @UseGuards(JwtAuthGuard)
+  //@UseGuards(JwtAuthGuard)
   async getAll() {
-    return await this.userService.getAll({});
+    return await this.userService.getAll();
   }
 
   @Patch('/:id')
   @UseGuards(JwtAuthGuard)
   async update(@Param('id') id: string, @Body() body: UpdateUserDto) {
-    return await this.userService.update({ where: { id: +id }, data: body });
+    return await this.userService.update(id, body);
   }
 
   @Delete('/:id')
   @UseGuards(JwtAuthGuard)
   async delete(@Param('id') id: string) {
-    return await this.userService.delete({ id: +id });
+    return await this.userService.delete(id);
   }
 }

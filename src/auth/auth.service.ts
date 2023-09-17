@@ -8,7 +8,7 @@ import { generateFromEmail } from 'unique-username-generator';
 import { RegisterUserDto } from './dto/register-user.dto';
 import { JwtPayload } from './strategies/jwt.strategy';
 import { UserService } from '../users/user.service';
-import { users } from '@prisma/client';
+import { User } from '@prisma/client';
 
 @Injectable()
 export class AuthService {
@@ -48,8 +48,6 @@ export class AuthService {
       const newUser = await this.userService.create({
         email: user.email,
         username: generateFromEmail(user.email, 5),
-        // created_at: new Date(),
-        // updated_at: new Date(),
       });
 
       return this.generateJwt({
@@ -62,8 +60,8 @@ export class AuthService {
     }
   }
 
-  async findUserByEmail(email: string): Promise<users> {
-    const user = await this.userService.getByEmail({ email });
+  async findUserByEmail(email: string): Promise<User> {
+    const user = await this.userService.getByEmail(email);
 
     if (!user) {
       return null;
