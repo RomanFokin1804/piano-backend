@@ -4,11 +4,9 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { generateFromEmail } from 'unique-username-generator';
-import { RegisterUserDto } from './dto/register-user.dto';
 import { JwtPayload } from './strategies/jwt.strategy';
 import { UserService } from '../users/user.service';
-import { User } from '@prisma/client';
+import { Prisma, User } from '@prisma/client';
 
 @Injectable()
 export class AuthService {
@@ -43,11 +41,29 @@ export class AuthService {
     }
   }
 
-  async registerUser(user: RegisterUserDto) {
+  async registerUser(user: Prisma.UserCreateInput) {
     try {
+      let username: string;
+
+      let usernameIsUnique = false;
+      do {
+        username = user?.lastName
+          ? `${user.firstName}${user.lastName}`
+          : user.firstName;
+        username = `${username}${Math.floor(Math.random() * 10000000)
+          .toString()
+          .padStart(7, '0')}`;
+
+        const userExist = await this.userService.getByUsername(username);
+        if (!userExist) usernameIsUnique = true;
+      } while (!usernameIsUnique);
+
       const newUser = await this.userService.create({
         email: user.email,
-        username: generateFromEmail(user.email, 5),
+        username,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        photo: user.photo,
       });
 
       return this.generateJwt({

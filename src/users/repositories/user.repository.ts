@@ -14,9 +14,7 @@ export class UserRepository {
     });
   }
 
-  async getByEmail(
-    userWhereInput: Prisma.UserWhereInput,
-  ): Promise<User | null> {
+  async getBy(userWhereInput: Prisma.UserWhereInput): Promise<User | null> {
     return this.prisma.user.findFirst({
       where: userWhereInput,
     });

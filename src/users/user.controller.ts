@@ -10,7 +10,6 @@ import {
 import { UserService } from './user.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { generateFromEmail } from 'unique-username-generator';
 
 @Controller('user')
 export class UserController {
@@ -23,7 +22,7 @@ export class UserController {
   }
 
   @Get()
-  //@UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   async getAll() {
     return await this.userService.getAll();
   }

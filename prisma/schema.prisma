@@ -8,9 +8,12 @@ datasource db {
 }
 
 model User {
-  id         BigInt   @id @default(autoincrement())
-  email      String?  @db.VarChar(255) @unique
-  username   String?  @db.VarChar(255)
+  id         Int   @id @default(autoincrement())
+  email      String   @db.VarChar(255) @unique
+  firstName  String   @db.VarChar(255) @map("first_name")
+  lastName   String?  @db.VarChar(255) @map("last_name")
+  photo      String?  @db.Text
+  username   String   @db.VarChar(255) @unique
   createdAt  DateTime @default(now()) @map("created_at")
   updatedAt  DateTime @updatedAt @map("updated_at")
 

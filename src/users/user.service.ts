@@ -11,7 +11,11 @@ export class UserService {
   }
 
   async getByEmail(email: string): Promise<User | null> {
-    return this.userRepository.getByEmail({ email });
+    return this.userRepository.getBy({ email });
+  }
+
+  async getByUsername(username: string): Promise<User | null> {
+    return this.userRepository.getBy({ username });
   }
 
   async getAll(): Promise<User[]> {

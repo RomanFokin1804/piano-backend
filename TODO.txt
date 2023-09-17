@@ -4,6 +4,7 @@
 - add refresh token
 + connect to github
 + check data from google
++ add more data to user table
 - endpoint for change username
 - module for statistic
 - module for notes
