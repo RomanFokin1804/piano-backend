@@ -8,14 +8,15 @@ datasource db {
 }
 
 model User {
-  id         Int   @id @default(autoincrement())
-  email      String   @db.VarChar(255) @unique
-  firstName  String   @db.VarChar(255) @map("first_name")
-  lastName   String?  @db.VarChar(255) @map("last_name")
-  photo      String?  @db.Text
-  username   String   @db.VarChar(255) @unique
-  createdAt  DateTime @default(now()) @map("created_at")
-  updatedAt  DateTime @updatedAt @map("updated_at")
+  id            Int       @id @default(autoincrement())
+  email         String    @db.VarChar(255) @unique
+  firstName     String    @db.VarChar(255) @map("first_name")
+  lastName      String?   @db.VarChar(255) @map("last_name")
+  photo         String?   @db.Text
+  username      String    @db.VarChar(255) @unique
+  refreshToken  String?   @db.Text @map("refresh_token")
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
 
   @@map("users")
 }

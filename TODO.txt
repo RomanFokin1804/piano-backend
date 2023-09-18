@@ -5,11 +5,12 @@
 + connect to github
 + check data from google
 + add more data to user table
-- endpoint for change username
++ endpoint for change username
 - module for statistic
 - module for notes
 - change language, animation Pes Patron piss
 + user module
+- endpoint for show history
 
 actions:
 - show note picture, need to enter note name and/or enter piano button

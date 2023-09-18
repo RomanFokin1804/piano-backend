@@ -3,7 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import configOauth from './config/config.oauth';
-import configJwt from './config/config.jwt';
+import configJwtAccess from './config/config.jwt-access';
+import configJwtRefresh from './config/config.jwt-refresh';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './users/user.module';
 import { PrismaModule } from './prisma/prisma.module';
@@ -14,7 +15,7 @@ import { PrismaModule } from './prisma/prisma.module';
     UserModule,
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [configOauth, configJwt],
+      load: [configOauth, configJwtAccess, configJwtRefresh],
     }),
     PrismaModule,
   ],

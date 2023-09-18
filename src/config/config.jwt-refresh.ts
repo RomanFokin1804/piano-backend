@@ -1,5 +1,5 @@
 import { registerAs } from '@nestjs/config';
-import { CONFIG_JWT } from './config.constant';
+import { CONFIG_JWT_REFRESH } from './config.constant';
 import * as process from 'process';
 
 export interface IJWTConfig {
@@ -10,11 +10,11 @@ export interface IJWTConfig {
 }
 
 export default registerAs(
-  CONFIG_JWT,
+  CONFIG_JWT_REFRESH,
   (): IJWTConfig => ({
-    secret: process.env.JWT_SECRET,
+    secret: process.env.JWT_REFRESH_SECRET,
     signOptions: {
-      expiresIn: process.env.JWT_EXPIRES_IN,
+      expiresIn: process.env.JWT_REFRESH_EXPIRES_IN,
     },
   }),
 );
