@@ -5,7 +5,7 @@ import { Prisma, User } from '@prisma/client';
 @Injectable()
 export class ExercisesTypeRepository {
   constructor(private prisma: PrismaService) {}
-  //TEST
+
   async getById(
     userWhereUniqueInput: Prisma.UserWhereUniqueInput,
   ): Promise<User | null> {
