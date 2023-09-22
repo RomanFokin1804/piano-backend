@@ -11,6 +11,7 @@
 - change language, animation Pes Patron piss
 + user module
 - endpoint for show history
++ add admin strategy
 
 actions:
 - show note picture, need to enter note name and/or enter piano button

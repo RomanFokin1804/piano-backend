@@ -7,6 +7,7 @@ import { AuthController } from './auth.controller';
 import { JwtAccessStrategy } from './strategies/jwt-access.strategy';
 import { UserModule } from '../users/user.module';
 import { JwtRefreshStrategy } from './strategies/jwt-refresh.strategy';
+import { JwtAdminStrategy } from './strategies/jwt-admin.strategy';
 
 @Module({
   imports: [JwtModule.register({}), PassportModule, UserModule],
@@ -16,6 +17,7 @@ import { JwtRefreshStrategy } from './strategies/jwt-refresh.strategy';
     GoogleStrategy,
     JwtAccessStrategy,
     JwtRefreshStrategy,
+    JwtAdminStrategy,
   ],
   exports: [AuthService],
 })
