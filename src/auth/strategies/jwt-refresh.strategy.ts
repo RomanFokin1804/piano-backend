@@ -39,7 +39,7 @@ export class JwtRefreshStrategy extends PassportStrategy(
   }
 
   async validate(req: Request, payload: JwtPayload) {
-    const user = await this.userService.getById(payload.sub);
+    const user = await this.userService.getById(+payload.sub);
     if (!user) throw new UnauthorizedException('Please log in to continue');
 
     const refreshToken = req.get('Authorization').replace('Bearer', '').trim();

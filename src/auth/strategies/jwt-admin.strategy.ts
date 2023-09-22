@@ -38,7 +38,7 @@ export class JwtAdminStrategy extends PassportStrategy(Strategy, 'jwt-admin') {
   }
 
   async validate(payload: JwtPayload) {
-    const user = await this.userService.getById(payload.sub);
+    const user = await this.userService.getById(+payload.sub);
     if (!user) throw new UnauthorizedException('Please log in to continue');
 
     const adminEmails =

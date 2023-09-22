@@ -8,9 +8,13 @@ export class UserRepository {
 
   async getById(
     userWhereUniqueInput: Prisma.UserWhereUniqueInput,
+    includeExercises = false,
   ): Promise<User | null> {
     return this.prisma.user.findUnique({
       where: userWhereUniqueInput,
+      include: {
+        exercises: includeExercises,
+      },
     });
   }
 

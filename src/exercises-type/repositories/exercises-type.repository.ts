@@ -1,22 +1,24 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
-import { Prisma, User } from '@prisma/client';
+import { Prisma, ExercisesType } from '@prisma/client';
 
 @Injectable()
 export class ExercisesTypeRepository {
   constructor(private prisma: PrismaService) {}
 
   async getById(
-    userWhereUniqueInput: Prisma.UserWhereUniqueInput,
-  ): Promise<User | null> {
-    return this.prisma.user.findUnique({
-      where: userWhereUniqueInput,
+    exercisesTypeWhereUniqueInput: Prisma.ExercisesTypeWhereUniqueInput,
+  ): Promise<ExercisesType | null> {
+    return this.prisma.exercisesType.findUnique({
+      where: exercisesTypeWhereUniqueInput,
     });
   }
 
-  async getBy(userWhereInput: Prisma.UserWhereInput): Promise<User | null> {
-    return this.prisma.user.findFirst({
-      where: userWhereInput,
+  async getBy(
+    exercisesTypeWhereInput: Prisma.ExercisesTypeWhereInput,
+  ): Promise<ExercisesType | null> {
+    return this.prisma.exercisesType.findFirst({
+      where: exercisesTypeWhereInput,
     });
   }
 
@@ -29,11 +31,11 @@ export class ExercisesTypeRepository {
   }: {
     skip?: number;
     take?: number;
-    cursor?: Prisma.UserWhereUniqueInput;
-    where?: Prisma.UserWhereInput;
-    orderBy?: Prisma.UserOrderByWithRelationInput;
-  }): Promise<User[]> {
-    return this.prisma.user.findMany({
+    cursor?: Prisma.ExercisesTypeWhereUniqueInput;
+    where?: Prisma.ExercisesTypeWhereInput;
+    orderBy?: Prisma.ExercisesTypeOrderByWithRelationInput;
+  }): Promise<ExercisesType[]> {
+    return this.prisma.exercisesType.findMany({
       skip,
       take,
       cursor,
@@ -42,8 +44,8 @@ export class ExercisesTypeRepository {
     });
   }
 
-  async create(data: Prisma.UserCreateInput): Promise<User> {
-    return this.prisma.user.create({
+  async create(data: Prisma.ExercisesTypeCreateInput): Promise<ExercisesType> {
+    return this.prisma.exercisesType.create({
       data,
     });
   }
@@ -52,17 +54,19 @@ export class ExercisesTypeRepository {
     where,
     data,
   }: {
-    where: Prisma.UserWhereUniqueInput;
-    data: Prisma.UserUpdateInput;
-  }): Promise<User> {
-    return this.prisma.user.update({
+    where: Prisma.ExercisesTypeWhereUniqueInput;
+    data: Prisma.ExercisesTypeUpdateInput;
+  }): Promise<ExercisesType> {
+    return this.prisma.exercisesType.update({
       data,
       where,
     });
   }
 
-  async delete(where: Prisma.UserWhereUniqueInput): Promise<User> {
-    return this.prisma.user.delete({
+  async delete(
+    where: Prisma.ExercisesTypeWhereUniqueInput,
+  ): Promise<ExercisesType> {
+    return this.prisma.exercisesType.delete({
       where,
     });
   }

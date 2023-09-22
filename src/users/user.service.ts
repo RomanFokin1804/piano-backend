@@ -6,8 +6,8 @@ import { UserRepository } from './repositories/user.repository';
 export class UserService {
   constructor(private userRepository: UserRepository) {}
 
-  async getById(id: string): Promise<User | null> {
-    return this.userRepository.getById({ id: Number(id) });
+  async getById(id: number, includeExercises?: boolean): Promise<User | null> {
+    return this.userRepository.getById({ id }, includeExercises);
   }
 
   async getByEmail(email: string): Promise<User | null> {
@@ -26,11 +26,11 @@ export class UserService {
     return this.userRepository.create(data);
   }
 
-  async update(id: string, body: Prisma.UserUpdateInput): Promise<User> {
-    return this.userRepository.update({ where: { id: +id }, data: body });
+  async update(id: number, body: Prisma.UserUpdateInput): Promise<User> {
+    return this.userRepository.update({ where: { id }, data: body });
   }
 
-  async delete(id: string): Promise<User> {
-    return this.userRepository.delete({ id: +id });
+  async delete(id: number): Promise<User> {
+    return this.userRepository.delete({ id });
   }
 }

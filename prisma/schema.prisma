@@ -34,9 +34,9 @@ model ExercisesType {
 
 model Exercise {
   id                      Int                 @id @default(autoincrement())
-  userId                  Int
+  userId                  Int                 @map("user_id")
   user                    User                @relation(fields: [userId], references: [id])
-  typeId                  Int
+  typeId                  Int                 @map("type_id")
   type                    ExercisesType       @relation(fields: [typeId], references: [id])
   exercise                Json
   createdAt               DateTime            @default(now()) @map("created_at")

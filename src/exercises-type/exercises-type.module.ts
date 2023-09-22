@@ -11,4 +11,4 @@ import { ExercisesTypeRepository } from './repositories/exercises-type.repositor
   providers: [ExercisesTypeService, PrismaService, ExercisesTypeRepository],
   exports: [ExercisesTypeService],
 })
-export class UserModule {}
+export class ExercisesTypeModule {}

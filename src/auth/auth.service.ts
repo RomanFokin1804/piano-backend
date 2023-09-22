@@ -45,7 +45,7 @@ export class AuthService {
     }
   }
 
-  async logout(id: string): Promise<User> {
+  async logout(id: number): Promise<User> {
     return this.userService.update(id, { refreshToken: null });
   }
 
@@ -84,7 +84,7 @@ export class AuthService {
     }
   }
 
-  async refreshTokens(userId: string, refreshToken: string) {
+  async refreshTokens(userId: number, refreshToken: string) {
     const user = await this.userService.getById(userId);
     if (!user || !user.refreshToken)
       throw new ForbiddenException('Access Denied');
@@ -121,7 +121,7 @@ export class AuthService {
       }),
     ]);
 
-    await this.userService.update(payload.sub, {
+    await this.userService.update(+payload.sub, {
       refreshToken: await argon2.hash(refreshToken),
     });
 
