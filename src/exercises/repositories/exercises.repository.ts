@@ -47,6 +47,14 @@ export class ExercisesRepository {
   async create(data: Prisma.ExerciseCreateInput): Promise<Exercise> {
     return this.prisma.exercise.create({
       data,
+      include: {
+        notes: {
+          select: {
+            id: true,
+            note: true,
+          },
+        },
+      },
     });
   }
 

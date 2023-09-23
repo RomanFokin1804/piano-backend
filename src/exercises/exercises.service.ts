@@ -20,11 +20,10 @@ export class ExercisesService {
   }
 
   async create(data: CreateExerciseDto): Promise<Exercise> {
-    return this.exercisesRepository.create({
-      exercise: generateRandomNotes(
-        15,
-        data.difficulty,
-      ) as unknown as Prisma.InputJsonValue,
+    return await this.exercisesRepository.create({
+      notes: {
+        create: generateRandomNotes(15, data.difficulty),
+      },
       user: {
         connect: {
           id: data.userId,
@@ -73,21 +72,17 @@ function generateRandomNotes(
   ];
   const result: IRandomNote[] = [];
 
-  // Генеруємо першу ноту випадковим чином
   result.push({
     note: notes[Math.floor(Math.random() * notes.length)],
-    time: -1,
-    status: 'unresolved',
   });
 
-  // Генеруємо інші ноти
   for (let i = 1; i < length; i++) {
     const currentIndex = notes.indexOf(result[i - 1].note);
     const minIndex = Math.max(0, currentIndex - maxDifference);
     const maxIndex = Math.min(notes.length - 1, currentIndex + maxDifference);
     const nextIndex =
       Math.floor(Math.random() * (maxIndex - minIndex + 1)) + minIndex;
-    result.push({ note: notes[nextIndex], time: -1, status: 'unresolved' });
+    result.push({ note: notes[nextIndex] });
   }
 
   return result;

@@ -29,6 +29,4 @@ export class CreateExerciseDto {
 
 export interface IRandomNote {
   note: string;
-  time: number;
-  status: string;
 }

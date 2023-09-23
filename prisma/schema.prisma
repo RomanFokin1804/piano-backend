@@ -38,9 +38,29 @@ model Exercise {
   user                    User                @relation(fields: [userId], references: [id])
   typeId                  Int                 @map("type_id")
   type                    ExercisesType       @relation(fields: [typeId], references: [id])
-  exercise                Json
+  notes                   Note[]
   createdAt               DateTime            @default(now()) @map("created_at")
   updatedAt               DateTime            @updatedAt @map("updated_at")
 
   @@map("exercises")
+}
+
+model Note {
+  id                      Int                 @id @default(autoincrement())
+  exerciseId              Int                 @map("exercise_id")
+  exercise                Exercise            @relation(fields: [exerciseId], references: [id])
+  note                    String              @db.VarChar(15)
+  time                    Float               @db.Float @default(0)
+  result                  String?             @db.VarChar(15)
+  status                  NoteStatus          @default(NO_ANSWER)
+  createdAt               DateTime            @default(now()) @map("created_at")
+  updatedAt               DateTime            @updatedAt @map("updated_at")
+
+  @@map("notes")
+}
+
+enum NoteStatus {
+  NO_ANSWER
+  SUCCESS
+  FAIL
 }
